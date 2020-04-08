@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import './App.css'
 
 class App extends React.Component {
   constructor() {
@@ -26,36 +26,24 @@ class App extends React.Component {
       console.log('follower executed');
     });
   }
-
-
-  handleChange = event => {
-    this.setState({
-      breedName: event.target.value
-    });
-  };
-
-
-  fetchBreed = event => {
-    event.preventDefault();
-    axios
-      .get(`https://dog.ceo/api/breed/${this.state.breedName}/images`)
-      .then(res => {
-        this.setState({ doggos: res.data.message });
-      });
-  };
   render() {
     return (
       <div className="App">
         <h1>Github-User</h1>
-        <h2>user:</h2> {this.state.userName} <br/>
-        <img width="200" src={this.state.avatar} /><br/>
-        <h2>Followers: </h2>
-        {this.state.followers.map((person) => (
-          <div>
-            {person.login} <br/>
-            <img width="200" src={person.avatar_url} />
-          </div>
-        ))}
+        <h2>User:</h2>
+        <div className='userCard'>
+          {this.state.userName} 
+          <img src={this.state.avatar} />
+        </div>
+        <h2>Followers:</h2>
+        <div className='followersArea'>
+          {this.state.followers.map((person) => (
+              <div className='card'>
+                {person.login} 
+                <img src={person.avatar_url} />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
